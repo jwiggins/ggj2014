@@ -19,7 +19,6 @@ function Character.new(tab)
     self.speed = 1.0
     self.keys = tab.keys
     self.color = tab.color
-    self.frozen = false
     return self
 end
 
@@ -52,19 +51,15 @@ function Character:drawSight()
 end
 
 function Character:forward()
-    if not self.frozen then
-        local dX, dY = utils.angleToVector(self.facing, self.speed)
-        self.x = self.x + dX
-        self.y = self.y + dY
-    end
+    local dX, dY = utils.angleToVector(self.facing, self.speed)
+    self.x = self.x + dX
+    self.y = self.y + dY
 end
 
 function Character:backward()
-    if not self.frozen then
-        local dX, dY = utils.angleToVector(self.facing, self.speed)
-        self.x = self.x - dX
-        self.y = self.y - dY
-    end
+    local dX, dY = utils.angleToVector(self.facing, self.speed)
+    self.x = self.x - dX
+    self.y = self.y - dY
 end
 
 function Character:rotateLeft()
@@ -76,11 +71,11 @@ function Character:rotateRight()
 end
 
 function Character:freeze()
-    self.frozen = true
+    self.speed = 0.1
 end
 
 function Character:unfreeze()
-    self.frozen = false
+    self.speed = 1.0
 end
 
 
