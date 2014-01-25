@@ -5,7 +5,7 @@ local rules = {}
 -- Some constants that outside code might need.
 rules.minAngle = (-math.pi/6.0)
 rules.maxAngle = (math.pi/6.0)
-rules.sightDistance = 250
+rules.sightDistance = 300
 
 -- Private functions
 local function canSee(char1, char2)

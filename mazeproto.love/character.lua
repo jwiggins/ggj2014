@@ -36,7 +36,6 @@ function Character:draw()
     love.graphics.push()
     love.graphics.translate(self.x, self.y)
     love.graphics.rotate(self.facing)
-    self:drawSight()
     love.graphics.scale(10.0, -10.0)
     love.graphics.setColor(self.color)
     love.graphics.polygon("fill", 1.0, 0.0, -0.5, 0.866025, 0.0, 0.0, -0.5, -0.866025)
@@ -44,14 +43,12 @@ function Character:draw()
 end
 
 function Character:drawSight()
-    local angles = {rules.minAngle, rules.maxAngle}
-
-    love.graphics.setColor(255, 255, 255, 255)
-    for i, face in pairs(angles) do
-        local x, y = utils.angleToVector(face, rules.sightDistance)
-        love.graphics.line(0.0, 0.0, x, y)
-    end
-    love.graphics.arc("line", 0.0, 0.0, rules.sightDistance, rules.minAngle, rules.maxAngle)
+    love.graphics.push()
+    love.graphics.translate(self.x, self.y)
+    love.graphics.rotate(self.facing)
+    love.graphics.setColor(255, 255, 255, 128)
+    love.graphics.arc("fill", 0.0, 0.0, rules.sightDistance, rules.minAngle, rules.maxAngle)
+    love.graphics.pop()
 end
 
 function Character:forward()

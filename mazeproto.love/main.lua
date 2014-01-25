@@ -24,6 +24,9 @@ function love.draw()
     love.graphics.push()
     love.graphics.translate(width/2.0, height/2.0)
     for k,v in pairs(characters) do
+        v:drawSight()
+    end
+    for k,v in pairs(characters) do
         v:draw()
     end
     love.graphics.pop()
