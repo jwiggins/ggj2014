@@ -31,8 +31,8 @@ local movementFunctions = {'forward', 'backward', 'rotateLeft', 'rotateRight'}
 function Character.new(tab)
     local self = setmetatable({}, Character)
     local width, height = love.window.getDimensions()
-    self.x = (width / 2) + randomInRange(-100, 100)
-    self.y = (height / 2) + randomInRange(-100, 100)
+    self.x = randomInRange(-100, 100)
+    self.y = randomInRange(-100, 100)
     self.facing = math.pi / 2.0
     self.speed = 1.0
     self.keys = tab.keys
@@ -52,7 +52,6 @@ end
 function Character:draw()
     love.graphics.push()
     love.graphics.setColor(self.color)
-
     love.graphics.translate(self.x, self.y)
     love.graphics.rotate(-self.facing)
     love.graphics.scale(10.0, 10.0)

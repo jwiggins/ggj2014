@@ -15,7 +15,12 @@ function love.update(dt)
 end
 
 function love.draw()
+    local width, height = love.window.getDimensions()
+
+    love.graphics.push()
+    love.graphics.translate(width/2.0, height/2.0)
     for k,v in pairs(characters) do
         v:draw()
     end
+    love.graphics.pop()
 end
