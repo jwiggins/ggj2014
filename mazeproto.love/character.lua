@@ -14,6 +14,11 @@ end
 
 local moveFuctions = {upFunc, downFunc, leftFunc, rightFunc}
 
+local function randomInRange(start, stop)
+    local size = stop-start
+    return start + math.random(size)
+end
+
 -- The Character class
 local Character = {}
 Character.__index = Character
@@ -24,8 +29,9 @@ setmetatable(Character, {
 
 function Character.new(tab)
     local self = setmetatable({}, Character)
-    self.x = tab.x
-    self.y = tab.y
+    local width, height = love.window.getDimensions()
+    self.x = (width / 2) + randomInRange(-100, 100)
+    self.y = (height / 2) + randomInRange(-100, 100)
     self.keys = tab.keys
     self.color = tab.color
     return self

@@ -2,9 +2,9 @@ character_lib = require('character')
 Character = character_lib.Character
 
 function love.load()
-    characters = {Character({x = 0, y = 0, color = {255, 0, 0, 255},
+    characters = {Character({color = {255, 0, 0, 255},
                              keys = {'w', 's', 'a', 'd'}}),
-                  Character({x = 0, y = 0, color = {0, 0, 255, 255},
+                  Character({color = {0, 0, 255, 255},
                              keys = {'i', 'k', 'j', 'l'}})}
 end
 
