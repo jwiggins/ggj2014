@@ -1,5 +1,9 @@
 local utils = {}
 
+function utils.angleToVector(angle, mag)
+    return mag * math.cos(angle), mag * math.sin(angle)
+end
+
 function utils.clampAngle(angle)
     local circle = math.pi*2.0
     if angle > math.pi then
@@ -10,8 +14,12 @@ function utils.clampAngle(angle)
     return angle
 end
 
+function utils.length(x, y)
+    return math.sqrt(x*x + y*y)
+end
+
 function utils.normalize(x, y)
-    local mag = math.sqrt(x*x + y*y)
+    local mag = utils.length(x, y)
     return x/mag, y/mag
 end
 

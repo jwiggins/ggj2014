@@ -1,21 +1,21 @@
-character_lib = require('character')
-Character = character_lib.Character
-rules_lib = require('rules')
-Rules = rules_lib.Rules
+character = require('character')
+rules = require('rules')
+
+local characters, ruler
 
 function love.load()
-    characters = {Character({color = {255, 0, 0, 255},
-                             keys = {'w', 's', 'a', 'd'}}),
-                  Character({color = {0, 0, 255, 255},
-                             keys = {'up', 'down', 'left', 'right'}})}
-    rules = Rules(characters)
+    characters = {character.Character({color = {255, 0, 0, 255},
+                                       keys = {'w', 's', 'a', 'd'}}),
+                  character.Character({color = {0, 0, 255, 255},
+                                       keys = {'up', 'down', 'left', 'right'}})}
+    ruler = rules.Ruler(characters)
 end
 
 function love.update(dt)
     for k,v in pairs(characters) do
         v:update()
     end
-    rules:update()
+    ruler:update()
 end
 
 function love.draw()
