@@ -5,9 +5,7 @@ function love.load()
     characters = {Character({x = 0, y = 0, color = {255, 0, 0, 255},
                              keys = {'w', 's', 'a', 'd'}}),
                   Character({x = 0, y = 0, color = {0, 0, 255, 255},
-                             keys = {'i', 'k', 'j', 'l'}}),
-                  Character({x = 0, y = 0, color = {0, 255, 0, 255},
-                             keys = {'up', 'down', 'left', 'right'}})}
+                             keys = {'i', 'k', 'j', 'l'}})}
 end
 
 function love.update(dt)
