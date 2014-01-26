@@ -1,31 +1,12 @@
 local utils = require("utils")
 
--- Special map tiles
-local objectLayerData = {
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-}
-
-
 local rules = {}
 
 -- Some constants that outside code might need.
 rules.minAngle = (-math.pi/6.0)
 rules.maxAngle = (math.pi/6.0)
 rules.sightDistance = 300
+rules.goalTile = 5
 
 -- Private functions
 local function canSee(char1, char2)
@@ -53,20 +34,16 @@ function rules.Ruler.new(tab)
     self.characters = tab.characters
     self.map = tab.map
     self.gameWon = false
-
-    self.map:addCustomLayer("Specials", 3)
-    self.map.layers["Specials"].data = objectLayerData
-
     return self
 end
 
 function rules.Ruler:update(dt)
-    local specials = self.map.layers["Specials"]
+    local terrain = self.map.layers["Terrain"]
     local goals = 0
     for i, chr in pairs(self.characters) do
         local tx, ty = utils.screenToTileCoordinate(chr.x, chr.y)
         if ty > 0 and ty < utils.tilesHeight and tx > 0 and tx < utils.tilesWidth then
-            if specials.data[ty][tx] ~= nil and specials.data[ty][tx] == 1 then
+            if terrain.data[ty][tx] ~= nil and terrain.data[ty][tx] == rules.goalTile then
                 goals = goals + 1
             end
         end
