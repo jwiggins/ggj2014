@@ -30,7 +30,8 @@ setmetatable(rules.Ruler, {
 
 function rules.Ruler.new(tab)
     local self = setmetatable({}, rules.Ruler)
-    self.characters = tab
+    self.characters = tab.characters
+    self.map = tab.map
     return self
 end
 

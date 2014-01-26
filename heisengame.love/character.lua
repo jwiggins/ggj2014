@@ -19,6 +19,7 @@ function Character.new(tab)
     self.speed = 1.25
     self.keys = tab.keys
     self.color = tab.color
+    self.map = tab.map
     return self
 end
 
@@ -52,15 +53,19 @@ end
 
 function Character:forward()
     local dX, dY = utils.angleToVector(self.facing, self.speed)
-    self.x = self.x + dX
-    self.y = self.y + dY
-    self:stayInBounds()
+    self:updatePosition(self.x + dX, self.y + dY)
 end
 
 function Character:backward()
     local dX, dY = utils.angleToVector(self.facing, self.speed)
-    self.x = self.x - dX
-    self.y = self.y - dY
+    self:updatePosition(self.x - dX, self.y - dY)
+end
+
+function Character:updatePosition(newX, newY)
+    if not self:checkMapCollision(newX, newY) then
+        self.x = newX
+        self.y = newY
+    end
     self:stayInBounds()
 end
 
@@ -70,6 +75,18 @@ end
 
 function Character:rotateRight()
     self.facing = utils.clampAngle(self.facing + math.pi/128.0)
+end
+
+function Character:checkMapCollision(x, y)
+    local collision = self.map.layers["Collision"]
+    local tx, ty = utils.screenToTileCoordinate(x, y)
+    if ty > 0 and ty < utils.tilesHeight and tx > 0 and tx < utils.tilesWidth then
+        if collision.data[ty][tx] ~= nil then
+            return true
+        end
+    end
+
+    return false
 end
 
 function Character:stayInBounds()

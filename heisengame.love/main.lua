@@ -10,19 +10,25 @@ drawGrid = 1
 drawTerrain = 1
 
 function love.load()
-    local c1x, c1y = utils.tileToScreenCoordinate(1, 15)
-    local c2x, c2y = utils.tileToScreenCoordinate(2, 15)
-    characters = {character.Character({color = {255, 0, 0, 255},
-                                       keys = {'w', 's', 'a', 'd'},
-                                       x = c1x, y = c1y}),
-                  character.Character({color = {0, 0, 255, 255},
-                                       keys = {'up', 'down', 'left', 'right'},
-                                       x = c2x, y = c2y})}
-    ruler = rules.Ruler(characters)
-
+    -- Load the map
     map = tileloader.new("maps/heisenberg")
     map:setCollisionMap("Collision")
     map.layers["Collision"].opacity = 0.0
+
+    -- Create the characters
+    local c1x, c1y = utils.tileToScreenCoordinate(1, 15)
+    local c2x, c2y = utils.tileToScreenCoordinate(2, 15)
+    characters = {
+        character.Character({color = {255, 0, 0, 255},
+                             keys = {'w', 's', 'a', 'd'},
+                             x = c1x, y = c1y, map = map}),
+        character.Character({color = {0, 0, 255, 255},
+                             keys = {'up', 'down', 'left', 'right'},
+                             x = c2x, y = c2y, map = map}),
+    }
+
+    -- Create the simulation (XXX: The simulation doesn't do anything)
+    ruler = rules.Ruler({characters = characters, map = map})
 end
 
 function love.update(dt)

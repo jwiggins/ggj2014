@@ -35,6 +35,8 @@ end
 
 utils.tileSizeX = 40
 utils.tileSizeY = 40
+utils.tilesHeight = 15
+utils.tilesWidth = 20
 
 function utils.screenToTileCoordinate(x, y)
     local width, height = love.graphics.getDimensions()
