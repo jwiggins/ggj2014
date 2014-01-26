@@ -16,7 +16,7 @@ function Character.new(tab)
     self.x = utils.randomInRange(-100, 100)
     self.y = utils.randomInRange(-100, 100)
     self.facing = math.pi / 2.0
-    self.speed = 1.0
+    self.speed = 1.25
     self.keys = tab.keys
     self.color = tab.color
     return self
@@ -54,12 +54,14 @@ function Character:forward()
     local dX, dY = utils.angleToVector(self.facing, self.speed)
     self.x = self.x + dX
     self.y = self.y + dY
+    self:stayInBounds()
 end
 
 function Character:backward()
     local dX, dY = utils.angleToVector(self.facing, self.speed)
     self.x = self.x - dX
     self.y = self.y - dY
+    self:stayInBounds()
 end
 
 function Character:rotateLeft()
@@ -70,6 +72,13 @@ function Character:rotateRight()
     self.facing = utils.clampAngle(self.facing + math.pi/128.0)
 end
 
+function Character:stayInBounds()
+    local width, height = love.graphics.getDimensions()
+    local minX, maxX = -width/2.0, width/2.0
+    local minY, maxY = -height/2.0, height/2.0
+    self.x = utils.clampValue(self.x, minX, maxX)
+    self.y = utils.clampValue(self.y, minY, maxY)
+end
 
 return {
     Character = Character,

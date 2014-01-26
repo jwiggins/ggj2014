@@ -14,6 +14,10 @@ function utils.clampAngle(angle)
     return angle
 end
 
+function utils.clampValue(value, min, max)
+    return math.min(math.max(value, min), max)
+end
+
 function utils.length(x, y)
     return math.sqrt(x*x + y*y)
 end
