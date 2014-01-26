@@ -14,7 +14,7 @@ function love.load()
 	windowWidth = love.graphics.getWidth()
 	windowHeight = love.graphics.getHeight()
 	
-	map = sti.new("maps/heisenberg")
+	map = tileloader.new("maps/heisenberg")
 end
 
 function love.update(dt)
@@ -27,9 +27,13 @@ end
 
 function love.draw()
     local width, height = love.window.getDimensions()
-
+	
+	map:setDrawRange(0, 0, windowWidth, windowHeight)
+	map:draw()
+	
     love.graphics.push()
     love.graphics.translate(width/2.0, height/2.0)
+	
     for k,v in pairs(characters) do
         v:drawSight()
     end
@@ -37,7 +41,4 @@ function love.draw()
         v:draw()
     end
     love.graphics.pop()
-	
-	map:setDrawRange(0, 0, windowWidth, windowHeight)
-	map:draw()
 end
