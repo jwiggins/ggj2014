@@ -1,1 +1,1 @@
-"%programfiles%\love\love.exe" mazeproto.love
+"%programfiles%\love\love.exe" heisengame.love
