@@ -15,6 +15,8 @@ function love.load()
     windowHeight = love.graphics.getHeight()
 
     map = tileloader.new("maps/heisenberg")
+	map:setCollisionMap("Collision")
+	map.layers["Collision"].opacity = 0.2
 end
 
 function love.update(dt)
