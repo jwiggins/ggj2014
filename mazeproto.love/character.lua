@@ -70,15 +70,6 @@ function Character:rotateRight()
     self.facing = utils.clampAngle(self.facing + math.pi/128.0)
 end
 
-function Character:freeze()
-    self.speed = 0.1
-end
-
-function Character:unfreeze()
-    self.speed = 1.0
-end
-
-
 
 return {
     Character = Character,

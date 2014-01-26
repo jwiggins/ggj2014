@@ -35,19 +35,6 @@ function rules.Ruler.new(tab)
 end
 
 function rules.Ruler:update()
-    local char1 = self.characters[1]
-    local char2 = self.characters[2]
-
-    if canSee(char1, char2) then
-        char2:unfreeze()
-    else
-        char2:freeze()
-    end
-    if canSee(char2, char1) then
-        char1:unfreeze()
-    else
-        char1:freeze()
-    end
 end
 
 return rules
