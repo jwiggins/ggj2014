@@ -15,7 +15,7 @@ function Character.new(tab)
     local self = setmetatable({}, Character)
     self.x = tab.x
     self.y = tab.y
-    self.facing = math.pi / 2.0
+    self.facing = -math.pi / 2.0
     self.speed = 1.25
     self.keys = tab.keys
     self.color = tab.color
@@ -74,10 +74,8 @@ end
 
 function Character:stayInBounds()
     local width, height = love.graphics.getDimensions()
-    local minX, maxX = -width/2.0, width/2.0
-    local minY, maxY = -height/2.0, height/2.0
-    self.x = utils.clampValue(self.x, minX, maxX)
-    self.y = utils.clampValue(self.y, minY, maxY)
+    self.x = utils.clampValue(self.x, 0.0, width)
+    self.y = utils.clampValue(self.y, 0.0, height)
 end
 
 return {

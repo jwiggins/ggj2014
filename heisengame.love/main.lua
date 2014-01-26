@@ -1,6 +1,7 @@
 local character = require('character')
 local rules = require('rules')
 local tileloader = require('sti')
+local utils = require('utils')
 
 local characters, ruler, map
 
@@ -9,12 +10,14 @@ drawGrid = 1
 drawTerrain = 1
 
 function love.load()
+    local c1x, c1y = utils.tileToScreenCoordinate(1, 15)
+    local c2x, c2y = utils.tileToScreenCoordinate(2, 15)
     characters = {character.Character({color = {255, 0, 0, 255},
                                        keys = {'w', 's', 'a', 'd'},
-                                       x = 20, y = 20}),
+                                       x = c1x, y = c1y}),
                   character.Character({color = {0, 0, 255, 255},
                                        keys = {'up', 'down', 'left', 'right'},
-                                       x = 60, y = 20})}
+                                       x = c2x, y = c2y})}
     ruler = rules.Ruler(characters)
 
     map = tileloader.new("maps/heisenberg")

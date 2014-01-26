@@ -35,15 +35,19 @@ end
 
 utils.tileSizeX = 40
 utils.tileSizeY = 40
-utils.tileHeight = 15
-utils.tileWidth = 20
 
 function utils.screenToTileCoordinate(x, y)
     local width, height = love.graphics.getDimensions()
+    local tileX = math.floor(x / utils.tileSizeX)
+    local tileY = math.floor(y / utils.tileSizeY)
+    return tileX+1, tileY+1
 end
 
 function utils.tileToScreenCoordinate(x, y)
-    local width, height = love.graphics.getDimensions()
+    -- return the center of the tile
+    local screenX = math.floor((x-1) * utils.tileSizeX + utils.tileSizeX / 2)
+    local screenY = math.floor((y-1) * utils.tileSizeY + utils.tileSizeY / 2)
+    return screenX, screenY
 end
 
 return utils
