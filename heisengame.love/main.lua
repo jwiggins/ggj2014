@@ -39,15 +39,15 @@ function love.update(dt)
     map:update(dt)
 end
 
-function generateMask()
-	for k,v in pairs(characters) do
-		v:drawSightStencil()
-	end
+local function generateMask()
+    for k,v in pairs(characters) do
+        v:drawSightStencil()
+    end
 end
 
 function love.draw()
-	love.graphics.setStencil(generateMask)
-	
+    love.graphics.setStencil(generateMask)
+
     local width, height = love.window.getDimensions()
 
     if drawTerrain == 1 then
