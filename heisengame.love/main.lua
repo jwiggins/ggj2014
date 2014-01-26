@@ -5,14 +5,16 @@ local tileloader = require('sti')
 local characters, ruler, map
 
 -- GLOBALS --
-drawGrid = 0
+drawGrid = 1
 drawTerrain = 1
 
 function love.load()
     characters = {character.Character({color = {255, 0, 0, 255},
-                                       keys = {'w', 's', 'a', 'd'}}),
+                                       keys = {'w', 's', 'a', 'd'},
+                                       x = 20, y = 20}),
                   character.Character({color = {0, 0, 255, 255},
-                                       keys = {'up', 'down', 'left', 'right'}})}
+                                       keys = {'up', 'down', 'left', 'right'},
+                                       x = 60, y = 20})}
     ruler = rules.Ruler(characters)
 
     map = tileloader.new("maps/heisenberg")
@@ -40,15 +42,11 @@ function love.draw()
         map:drawCollisionMap()
     end
 
-    love.graphics.push()
-    love.graphics.translate(width/2.0, height/2.0)
-
     for k,v in pairs(characters) do
         v:drawSight()
     end
     for k,v in pairs(characters) do
         v:draw()
     end
-    love.graphics.pop()
 
 end

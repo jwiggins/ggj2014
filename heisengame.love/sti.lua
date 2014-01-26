@@ -529,7 +529,7 @@ function Map:drawCollisionMap()
 	local tw = self.tilewidth
 	local th = self.tileheight
 	
-	love.graphics.setColor(255, 255, 255, 255 * self.collision.opacity)
+	love.graphics.setColor(255, 0, 255, 255 * self.collision.opacity)
 	
 	for y=1, self.height do
 		for x=1, self.width do

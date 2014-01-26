@@ -13,8 +13,8 @@ local movementFunctions = {'forward', 'backward', 'rotateLeft', 'rotateRight'}
 
 function Character.new(tab)
     local self = setmetatable({}, Character)
-    self.x = utils.randomInRange(-100, 100)
-    self.y = utils.randomInRange(-100, 100)
+    self.x = tab.x
+    self.y = tab.y
     self.facing = math.pi / 2.0
     self.speed = 1.25
     self.keys = tab.keys

@@ -32,4 +32,18 @@ function utils.randomInRange(start, stop)
     return start + math.random(size)
 end
 
+
+utils.tileSizeX = 40
+utils.tileSizeY = 40
+utils.tileHeight = 15
+utils.tileWidth = 20
+
+function utils.screenToTileCoordinate(x, y)
+    local width, height = love.graphics.getDimensions()
+end
+
+function utils.tileToScreenCoordinate(x, y)
+    local width, height = love.graphics.getDimensions()
+end
+
 return utils
