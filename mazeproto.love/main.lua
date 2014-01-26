@@ -1,5 +1,6 @@
 character = require('character')
 rules = require('rules')
+tileloader = require('sti')
 
 local characters, ruler
 
@@ -9,6 +10,11 @@ function love.load()
                   character.Character({color = {0, 0, 255, 255},
                                        keys = {'up', 'down', 'left', 'right'}})}
     ruler = rules.Ruler(characters)
+	
+	windowWidth = love.graphics.getWidth()
+	windowHeight = love.graphics.getHeight()
+	
+	map = sti.new("maps/heisenberg")
 end
 
 function love.update(dt)
@@ -16,6 +22,7 @@ function love.update(dt)
         v:update()
     end
     ruler:update()
+	map:update(dt)
 end
 
 function love.draw()
@@ -30,4 +37,7 @@ function love.draw()
         v:draw()
     end
     love.graphics.pop()
+	
+	map:setDrawRange(0, 0, windowWidth, windowHeight)
+	map:draw()
 end
