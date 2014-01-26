@@ -27,7 +27,7 @@ function love.load()
                              x = c2x, y = c2y, map = map}),
     }
 
-    -- Create the simulation (XXX: The simulation doesn't do anything)
+    -- Create the simulation
     ruler = rules.Ruler({characters = characters, map = map})
 end
 
@@ -58,4 +58,12 @@ function love.draw()
         v:draw()
     end
 
+    if ruler.gameWon then
+        local textScale = 6
+        local winText = "YOU WIN!!"
+        local font = love.graphics.getFont()
+        local strWidth = font:getWidth(winText) * textScale
+        local strHeight = font:getHeight() * textScale
+        love.graphics.print(winText, width/2 - strWidth/2, height/2 - strHeight/2, 0, textScale, textScale)
+    end
 end

@@ -1,5 +1,25 @@
 local utils = require("utils")
 
+-- Special map tiles
+local objectLayerData = {
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+}
+
+
 local rules = {}
 
 -- Some constants that outside code might need.
@@ -32,10 +52,29 @@ function rules.Ruler.new(tab)
     local self = setmetatable({}, rules.Ruler)
     self.characters = tab.characters
     self.map = tab.map
+    self.gameWon = false
+
+    self.map:addCustomLayer("Specials", 3)
+    self.map.layers["Specials"].data = objectLayerData
+
     return self
 end
 
 function rules.Ruler:update(dt)
+    local specials = self.map.layers["Specials"]
+    local goals = 0
+    for i, chr in pairs(self.characters) do
+        local tx, ty = utils.screenToTileCoordinate(chr.x, chr.y)
+        if ty > 0 and ty < utils.tilesHeight and tx > 0 and tx < utils.tilesWidth then
+            if specials.data[ty][tx] ~= nil and specials.data[ty][tx] == 1 then
+                goals = goals + 1
+            end
+        end
+    end
+
+    if goals == #self.characters then
+        self.gameWon = true
+    end
 end
 
 return rules
