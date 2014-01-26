@@ -7,7 +7,7 @@ rules.minAngle = (-math.pi/6.0)
 rules.maxAngle = (math.pi/6.0)
 rules.minSightDistance = 30
 rules.maxSightDistance = 300
-rules.goalTile = 5
+rules.goalTile = 19
 
 -- Private functions
 local function canSee(char, pos)

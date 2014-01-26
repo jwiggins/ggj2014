@@ -1,19 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="40" tileheight="40">
  <tileset firstgid="1" name="heisenberg" tilewidth="40" tileheight="40">
-  <image source="heisenberg.png" trans="ff00ff" width="200" height="40"/>
+  <image source="heisenberg.png" trans="ff00ff" width="160" height="40"/>
  </tileset>
- <tileset firstgid="6" name="collisionmap" tilewidth="40" tileheight="40">
+ <tileset firstgid="5" name="collisionmap" tilewidth="40" tileheight="40">
   <image source="collisionmap.png" trans="ff00ff" width="40" height="40"/>
+ </tileset>
+ <tileset firstgid="6" name="Tileset" tilewidth="40" tileheight="40">
+  <image source="tileset.png" width="160" height="40"/>
+ </tileset>
+ <tileset firstgid="10" name="Tileset" tilewidth="40" tileheight="40">
+  <image source="tileset.png" width="160" height="40"/>
+ </tileset>
+ <tileset firstgid="14" name="Tile + Bridge New 2" tilewidth="40" tileheight="40">
+  <image source="bridge.png" width="40" height="40"/>
+ </tileset>
+ <tileset firstgid="15" name="Tileset 2" tilewidth="40" tileheight="40">
+  <image source="tileset2.png" width="120" height="40"/>
+ </tileset>
+ <tileset firstgid="18" name="tileset 3" tilewidth="40" tileheight="40">
+  <image source="tileset3.png" width="80" height="40"/>
  </tileset>
  <layer name="Terrain" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJy1k9sOwCAIQ6Fu///L2x5MTCMUlu2hUbwcsegws1EQbvlGaKjKXNlqnrm8B5v1nrQumFFf5YsPeJmfT3wKnvKXuRA8xZ86Fqnzq3lWvOR685iq99v7RswuL3uTU+ovVn2MeN34b94FvEQB9w==
+   eJy1k1EOwCAIQ6F6/zNvPyYGgYLZPho16gOKDhEZBeGVOkJDVebOZvuWa+/AOa/JqIQZzVm++ICX+RnV0fHXckF4jL80N7H41TyZl16/IWdNWb9v642YXV72JpfYX6z6GPG66795D67cAfI=
   </data>
  </layer>
  <layer name="Collision" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJy1kcEKACAMQnfq/z+56xCy5yIhwlouXRXDMud0Uc3kXmsc7/WnnWiQOgXRIF5OeRIf7k9d33H3PgXVm8xDcyLZKX/xe8uW6CWz7D1Sn6T/hP/Q2wcbAf8=
+   eJy1k8EOwCAIQzmWyxKz///X7WJiECgs89CoUR9QdIjIKAiv1BEaqjJXNtu3XHsHznlNRiXMaM7yxQ+8zM+7wGP+Wi4Ij/GnrkUsfjVP5qXXb8heU9bvr/VGzC4ve5NT7C9WfYx43fVp3gNCRAvz
   </data>
  </layer>
 </map>
