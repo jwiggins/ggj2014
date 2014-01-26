@@ -28,10 +28,12 @@ function love.load()
                              x = c2x, y = c2y, map = map}),
     }
 
+    -- Special tiles that can block you
     magic_tiles = special.Special()
 
     -- Create the simulation
-    ruler = rules.Ruler({characters = characters, map = map})
+    ruler = rules.Ruler({characters = characters, map = map,
+                         magic_tiles = magic_tiles})
 end
 
 function love.update(dt)
