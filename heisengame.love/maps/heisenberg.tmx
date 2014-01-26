@@ -8,12 +8,12 @@
  </tileset>
  <layer name="Terrain" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJy1k1EOwCAIQ6Fu97/y3IeJYUBh2T4aJeoTig4RGQVhSh2hoSpzZ7N1y7Vn4OzXZFTCjOYsX3zAy/y845PwmL+WC8Jj/KVjE7u/mifz0us35FlT1u+39UbMLi97k0vsL1Z9jHjd+G/eBbpsAfY=
+   eJy1k9sOwCAIQ6Fu///L2x5MTCMUlu2hUbwcsegws1EQbvlGaKjKXNlqnrm8B5v1nrQumFFf5YsPeJmfT3wKnvKXuRA8xZ86Fqnzq3lWvOR685iq99v7RswuL3uTU+ovVn2MeN34b94FvEQB9w==
   </data>
  </layer>
  <layer name="Collision" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJy1kkEKACAIBD35/yd3FcFtNkmIsmxstQhmKfbpoEznvMcov8ZPM2GQuG6EQbRM9SQ61JsqX/nqvmuUt+lHtrXzZzZ6b7UlPKeXNYerk+R/8X/wDvv8Afk=
+   eJy1kcEKACAMQnfq/z+56xCy5yIhwlouXRXDMud0Uc3kXmsc7/WnnWiQOgXRIF5OeRIf7k9d33H3PgXVm8xDcyLZKX/xe8uW6CWz7D1Sn6T/hP/Q2wcbAf8=
   </data>
  </layer>
 </map>
