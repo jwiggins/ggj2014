@@ -80,7 +80,7 @@ end
 function Character:checkMapCollision(x, y)
     local collision = self.map.layers["Collision"]
     local tx, ty = utils.screenToTileCoordinate(x, y)
-    if ty > 0 and ty < utils.tilesHeight and tx > 0 and tx < utils.tilesWidth then
+    if ty > 0 and ty <= utils.tilesHeight and tx > 0 and tx <= utils.tilesWidth then
         if collision.data[ty][tx] ~= nil then
             return true
         end
