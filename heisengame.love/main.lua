@@ -78,6 +78,7 @@ function love.draw()
         local font = love.graphics.getFont()
         local strWidth = font:getWidth(winText) * textScale
         local strHeight = font:getHeight() * textScale
+        love.graphics.setStencil(nil)
         love.graphics.print(winText, width/2 - strWidth/2, height/2 - strHeight/2, 0, textScale, textScale)
     end
 end
