@@ -1,12 +1,13 @@
 local character = require('character')
 local rules = require('rules')
+local special = require('special_tiles')
 local tileloader = require('sti')
 local utils = require('utils')
 
-local characters, ruler, map
+local characters, ruler, map, magic_tiles
 
 -- GLOBALS --
-drawGrid = 1
+drawGrid = 0
 drawTerrain = 1
 
 function love.load()
@@ -27,8 +28,12 @@ function love.load()
                              x = c2x, y = c2y, map = map}),
     }
 
+    -- Special tiles that can block you
+    magic_tiles = special.Special()
+
     -- Create the simulation
-    ruler = rules.Ruler({characters = characters, map = map})
+    ruler = rules.Ruler({characters = characters, map = map,
+                         magic_tiles = magic_tiles})
 end
 
 function love.update(dt)
@@ -39,15 +44,15 @@ function love.update(dt)
     map:update(dt)
 end
 
-function generateMask()
-	for k,v in pairs(characters) do
-		v:drawSightStencil()
-	end
+local function generateMask()
+    for k,v in pairs(characters) do
+        v:drawSightStencil()
+    end
 end
 
 function love.draw()
-	love.graphics.setStencil(generateMask)
-	
+    love.graphics.setStencil(generateMask)
+
     local width, height = love.window.getDimensions()
 
     if drawTerrain == 1 then
@@ -58,6 +63,7 @@ function love.draw()
     if drawGrid == 1 then
         map:drawCollisionMap()
     end
+    magic_tiles:draw()
 
     for k,v in pairs(characters) do
         v:drawSight()

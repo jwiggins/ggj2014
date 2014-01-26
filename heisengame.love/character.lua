@@ -47,17 +47,17 @@ function Character:drawSight()
     love.graphics.translate(self.x, self.y)
     love.graphics.rotate(self.facing)
     love.graphics.setColor(255, 255, 255, 32)
-    love.graphics.arc("fill", -10.0, 0.0, rules.sightDistance + 10.0, rules.minAngle, rules.maxAngle)
+    love.graphics.arc("fill", -10.0, 0.0, rules.maxSightDistance + 10.0, rules.minAngle, rules.maxAngle)
     love.graphics.pop()
 end
 
 function Character:drawSightStencil()
-	love.graphics.push()
+    love.graphics.push()
     love.graphics.translate(self.x, self.y)
     love.graphics.rotate(self.facing)
     love.graphics.setColor(255, 255, 255, 255)
-	love.graphics.circle("fill", 0.0, 0.0, 12, 10)
-    love.graphics.arc("fill", -10.0, 0.0, rules.sightDistance + 10.0, rules.minAngle, rules.maxAngle)
+    love.graphics.circle("fill", 0.0, 0.0, 12, 10)
+    love.graphics.arc("fill", -10.0, 0.0, rules.maxSightDistance + 10.0, rules.minAngle, rules.maxAngle)
     love.graphics.pop()
 end
 
