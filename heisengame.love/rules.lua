@@ -42,8 +42,8 @@ function rules.Ruler:update(dt)
     local goals = 0
     for i, chr in pairs(self.characters) do
         local tx, ty = utils.screenToTileCoordinate(chr.x, chr.y)
-        if ty > 0 and ty < utils.tilesHeight and tx > 0 and tx < utils.tilesWidth then
-            if terrain.data[ty][tx] ~= nil and terrain.data[ty][tx] == rules.goalTile then
+        if ty > 0 and ty <= utils.tilesHeight and tx > 0 and tx <= utils.tilesWidth then
+            if terrain.data[ty][tx] ~= nil and terrain.data[ty][tx].gid == rules.goalTile then
                 goals = goals + 1
             end
         end
