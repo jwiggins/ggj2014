@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="40" tileheight="40">
+ <tileset firstgid="1" name="heisenberg" tilewidth="40" tileheight="40">
+  <image source="heisenberg.jpg" trans="ff00ff" width="160" height="40"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJy1k1EOwCAIQ6F6/zNvPyYGgYLZPho16gOKDhEZBeGVOkJDVebOZvuWa+/AOa/JqIQZzVm++ICX+RnV0fHXckF4jL80N7H41TyZl16/IWdNWb9v642YXV72JpfYX6z6GPG66795D67cAfI=
+  </data>
+ </layer>
+</map>
