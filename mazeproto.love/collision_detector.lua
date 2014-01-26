@@ -52,42 +52,24 @@ end
 function CollisionDetector:contactBegan(fixture1, fixture2, contact)
     local data1 = fixture1:getUserData()
     local data2 = fixture2:getUserData()
-    local typ1 = type(data1)
-    local typ2 = type(data2)
-    local tile, fov = nil, nil
-    if typ1 == 'Tile' then
-        tile = data1
-    elseif typ2 == 'Tile' then
-        tile = data2
-    end
-    if typ1 == 'FOV' then
-        fov = data1
-    elseif typ2 == 'FOV' then
-        fov = data2
-    end
-    if tile ~= nil and fov ~= nil then
-        tile.seen = true
+    if type(data1) ~= type(data2) then
+        for i, dat in ipairs({data1, data2}) do
+            if dat.seen ~= nil then
+                dat.seen = true
+            end
+        end
     end
 end
 
 function CollisionDetector:contactEnded(fixture1, fixture2, contact)
     local data1 = fixture1:getUserData()
     local data2 = fixture2:getUserData()
-    local typ1 = type(data1)
-    local typ2 = type(data2)
-    local tile, fov = nil, nil
-    if typ1 == 'Tile' then
-        tile = data1
-    elseif typ2 == 'Tile' then
-        tile = data2
-    end
-    if typ1 == 'FOV' then
-        fov = data1
-    elseif typ2 == 'FOV' then
-        fov = data2
-    end
-    if tile ~= nil and fov ~= nil then
-        tile.seen = false
+    if type(data1) ~= type(data2) then
+        for i, dat in ipairs({data1, data2}) do
+            if dat.seen ~= nil then
+                dat.seen = false
+            end
+        end
     end
 end
 
