@@ -15,7 +15,7 @@ return {
       tileheight = 40,
       spacing = 0,
       margin = 0,
-      image = "heisenberg.jpg",
+      image = "heisenberg.png",
       imagewidth = 160,
       imageheight = 40,
       transparentcolor = "#ff00ff",
