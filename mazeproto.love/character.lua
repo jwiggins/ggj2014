@@ -1,5 +1,5 @@
-utils = require("utils")
-rules = require("rules")
+local utils = require("utils")
+local rules = require("rules")
 
 -- The Character class
 local Character = {}
@@ -22,7 +22,7 @@ function Character.new(tab)
     return self
 end
 
-function Character:update()
+function Character:update(dt)
     local keys = self.keys
     for index, code in pairs(keys) do
         if love.keyboard.isDown(code) then

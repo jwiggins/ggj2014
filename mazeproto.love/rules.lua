@@ -1,4 +1,4 @@
-utils = require("utils")
+local utils = require("utils")
 
 local rules = {}
 
@@ -34,7 +34,7 @@ function rules.Ruler.new(tab)
     return self
 end
 
-function rules.Ruler:update()
+function rules.Ruler:update(dt)
 end
 
 return rules

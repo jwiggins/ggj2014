@@ -1,8 +1,8 @@
-character = require('character')
-rules = require('rules')
-tileloader = require('sti')
+local character = require('character')
+local rules = require('rules')
+local tileloader = require('sti')
 
-local characters, ruler
+local characters, ruler, map
 
 function love.load()
     characters = {character.Character({color = {255, 0, 0, 255},
@@ -11,26 +11,23 @@ function love.load()
                                        keys = {'up', 'down', 'left', 'right'}})}
     ruler = rules.Ruler(characters)
 
-    windowWidth = love.graphics.getWidth()
-    windowHeight = love.graphics.getHeight()
-
     map = tileloader.new("maps/heisenberg")
-	map:setCollisionMap("Collision")
-	map.layers["Collision"].opacity = 0.2
+    map:setCollisionMap("Collision")
+    map.layers["Collision"].opacity = 0.2
 end
 
 function love.update(dt)
     for k,v in pairs(characters) do
-        v:update()
+        v:update(dt)
     end
-    ruler:update()
+    ruler:update(dt)
     map:update(dt)
 end
 
 function love.draw()
     local width, height = love.window.getDimensions()
 
-    map:setDrawRange(0, 0, windowWidth, windowHeight)
+    map:setDrawRange(0, 0, width, height)
     map:draw()
 
     love.graphics.push()
