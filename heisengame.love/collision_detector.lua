@@ -1,3 +1,7 @@
+local function closureCaller(self, func)
+    return function (...) func(self, ...) end
+end
+
 -- The CollisionDetector class
 local CollisionDetector = {}
 CollisionDetector.__index = CollisionDetector
@@ -8,45 +12,60 @@ setmetatable(CollisionDetector, {
 
 function CollisionDetector.new(tiles, fovs)
     local self = setmetatable({}, CollisionDetector)
-    self.tiles = tiles
-    self.fovs = fovs
-    self:initWorld()
+    self:initWorld(tiles, fovs)
     return self
 end
 
-function CollisionDetector:initWorld()
+function CollisionDetector:initWorld(tiles, fovs)
     -- No gravity or sleeping allowed!
     local world = love.physics.newWorld(0.0, 0.0, false)
-    self:initTiles(world)
-    self:initFovs(world)
-    world:setCallbacks(world:contactBegan, world:contactEnded, nil, nil)
+    self:initTiles(world, tiles)
+    self:initFovs(world, fovs)
+
+    local contactBeganCB = closureCaller(self, CollisionDetector.contactBegan)
+    local contactEndedCB = closureCaller(self, CollisionDetector.contactEnded)
+    world:setCallbacks(contactBeganCB, contactEndedCB, nil, nil)
+
     self.world = world
 end
 
-function CollisionDetector:initTiles(world)
-    local fixtures
-    for i, t in pairs(self.tiles) do
+function CollisionDetector:initTiles(world, tiles)
+    local fixtures = {}
+    for i, t in ipairs(tiles) do
         local body = love.physics.newBody(world, t.x, t.y, "static")
         local shape = love.physics.newRectangleShape(t.width, t.height)
         local fixture = love.physics.newFixture(body, shape, 0.0)
-        fixture.setSensor(true)
-        fixture.setUserData(t)
-        fixtures.insert(#fixtures+1, fixture)
+        fixture:setSensor(true)
+        fixture:setUserData(t)
+        table.insert(fixtures, i, fixture)
     end
     self.tile_fixtures = fixtures
 end
 
-function CollisionDetector:initFovs()
-    local fixtures
-    for i, f in pairs(self.fovs) do
+function CollisionDetector:initFovs(world, fovs)
+    local fixtures = {}
+    for i, f in ipairs(fovs) do
         local body = love.physics.newBody(world, f.x, f.y, "dynamic")
-        local shape = love.physics.newPolygonShape(f:collisionPoints())
+        local pts = f:collisionPoints()
+        local shape = love.physics.newPolygonShape(pts[1], pts[2], pts[3], pts[4],
+                                                   pts[5], pts[6], pts[7], pts[8],
+                                                   pts[9], pts[10], pts[11], pts[12],
+                                                   pts[13], pts[14], pts[15], pts[16])
         local fixture = love.physics.newFixture(body, shape, 0.0)
-        fixture.setSensor(true)
-        fixture.setUserData(f)
-        fixtures.insert(#fixtures+1, fixture)
+        fixture:setSensor(true)
+        fixture:setUserData(f)
+        table.insert(fixtures, i, fixture)
     end
     self.fov_fixtures = fixtures
+end
+
+function CollisionDetector:update(dt)
+    for i, fov in ipairs(self.fov_fixtures) do
+        local chr = fov:getUserData().character
+        local body = fov:getBody()
+        body:setPosition(chr.x, chr.y)
+        body:setAngle(chr.facing)
+    end
 end
 
 function CollisionDetector:contactBegan(fixture1, fixture2, contact)
