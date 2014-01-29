@@ -74,7 +74,7 @@ function CollisionDetector:draw()
     love.graphics.setColor(255, 0, 255, 128)
     for i, tile in ipairs(self.tile_fixtures) do
         local t = tile:getUserData()
-        if t.seen then
+        if t.seen > 0 then
             love.graphics.rectangle("fill", t.x-10, t.y-10, 20, 20)
         end
     end
@@ -87,7 +87,7 @@ function CollisionDetector:contactBegan(fixture1, fixture2, contact)
     if data1.kind ~= data2.kind then
         for i, dat in ipairs({data1, data2}) do
             if dat.seen ~= nil then
-                dat.seen = true
+                dat.seen = dat.seen + 1
             end
         end
     end
@@ -99,7 +99,7 @@ function CollisionDetector:contactEnded(fixture1, fixture2, contact)
     if data1.kind ~= data2.kind then
         for i, dat in ipairs({data1, data2}) do
             if dat.seen ~= nil then
-                dat.seen = false
+                dat.seen = dat.seen - 1
             end
         end
     end

@@ -17,7 +17,7 @@ function Tile.new(data)
     self.tile = data[3]
     self.width = utils.tileSizeX
     self.height = utils.tileSizeY
-    self.seen = false
+    self.seen = 0
     return self
 end
 
