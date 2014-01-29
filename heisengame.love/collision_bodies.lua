@@ -11,6 +11,7 @@ setmetatable(Tile, {
 
 function Tile.new(data)
     local self = setmetatable({}, Tile)
+    self.kind = "tile"
     self.x = data[1]
     self.y = data[2]
     self.tile = data[3]
@@ -30,6 +31,7 @@ setmetatable(FOV, {
 
 function FOV.new(character)
     local self = setmetatable({}, FOV)
+    self.kind = "fov"
     self.x = 0
     self.y = 0
     self.character = character

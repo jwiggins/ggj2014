@@ -66,12 +66,13 @@ function CollisionDetector:update(dt)
         body:setPosition(chr.x, chr.y)
         body:setAngle(chr.facing)
     end
+    self.world:update(dt)
 end
 
 function CollisionDetector:contactBegan(fixture1, fixture2, contact)
     local data1 = fixture1:getUserData()
     local data2 = fixture2:getUserData()
-    if type(data1) ~= type(data2) then
+    if data1.kind ~= data2.kind then
         for i, dat in ipairs({data1, data2}) do
             if dat.seen ~= nil then
                 dat.seen = true
@@ -83,7 +84,7 @@ end
 function CollisionDetector:contactEnded(fixture1, fixture2, contact)
     local data1 = fixture1:getUserData()
     local data2 = fixture2:getUserData()
-    if type(data1) ~= type(data2) then
+    if data1.kind ~= data2.kind then
         for i, dat in ipairs({data1, data2}) do
             if dat.seen ~= nil then
                 dat.seen = false
