@@ -2,15 +2,8 @@ local utils = require("utils")
 local rules = require("rules")
 
 -- The Tile class
-local Tile = {}
-Tile.__index = Tile
-
-setmetatable(Tile, {
-    __call = function (cls, ...) return cls.new(...) end
-})
-
-function Tile.new(data)
-    local self = setmetatable({}, Tile)
+local Tile = class()
+function Tile:__init(data)
     self.kind = "tile"
     self.x = data[1]
     self.y = data[2]
@@ -18,19 +11,11 @@ function Tile.new(data)
     self.width = utils.tileSizeX
     self.height = utils.tileSizeY
     self.seen = 0
-    return self
 end
 
 -- The FOV class
-local FOV = {}
-FOV.__index = FOV
-
-setmetatable(FOV, {
-    __call = function (cls, ...) return cls.new(...) end
-})
-
-function FOV.new(character)
-    local self = setmetatable({}, FOV)
+local FOV = class()
+function FOV:__init(character)
     self.kind = "fov"
     self.x = 0
     self.y = 0
@@ -46,7 +31,6 @@ function FOV.new(character)
         table.insert(points, #points+1, y)
     end
     self.points = points
-    return self
 end
 
 function FOV:collisionPoints()

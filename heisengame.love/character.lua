@@ -1,18 +1,11 @@
 local utils = require("utils")
 local rules = require("rules")
 
--- The Character class
-local Character = {}
-Character.__index = Character
-
-setmetatable(Character, {
-    __call = function (cls, ...) return cls.new(...) end
-})
-
 local movementFunctions = {'forward', 'backward', 'rotateLeft', 'rotateRight'}
 
-function Character.new(tab)
-    local self = setmetatable({}, Character)
+-- The Character class
+local Character = class()
+function Character:__init(tab)
     self.x = tab.x
     self.y = tab.y
     self.facing = -math.pi / 2.0
@@ -20,7 +13,6 @@ function Character.new(tab)
     self.keys = tab.keys
     self.color = tab.color
     self.map = tab.map
-    return self
 end
 
 function Character:update(dt)

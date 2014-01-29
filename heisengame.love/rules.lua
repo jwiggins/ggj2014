@@ -65,24 +65,15 @@ end
 
 
 -- The Ruler class
-rules.Ruler = {}
-rules.Ruler.__index = rules.Ruler
-
-setmetatable(rules.Ruler, {
-    __call = function (cls, ...) return cls.new(...) end
-})
-
-function rules.Ruler.new(tab)
-    local self = setmetatable({}, rules.Ruler)
+local Ruler = class()
+function Ruler:__init(tab)
     self.characters = tab.characters
     self.map = tab.map
     self.collision = buildCollisionDetector(self.map, self.characters)
     self.gameWon = false
-
-    return self
 end
 
-function rules.Ruler:update(dt)
+function Ruler:update(dt)
     -- Update the collision detection
     self.collision:update(dt)
 
@@ -102,7 +93,7 @@ function rules.Ruler:update(dt)
     end
 end
 
-function rules.Ruler:draw()
+function Ruler:draw()
     local width, height = love.window.getDimensions()
 
     self.collision:draw()
@@ -119,4 +110,5 @@ function rules.Ruler:draw()
     end
 end
 
+rules.Ruler = Ruler
 return rules

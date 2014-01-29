@@ -3,20 +3,8 @@ local function closureCaller(self, func)
 end
 
 -- The CollisionDetector class
-local CollisionDetector = {}
-CollisionDetector.__index = CollisionDetector
-
-setmetatable(CollisionDetector, {
-    __call = function (cls, ...) return cls.new(...) end
-})
-
-function CollisionDetector.new(tiles, fovs)
-    local self = setmetatable({}, CollisionDetector)
-    self:initWorld(tiles, fovs)
-    return self
-end
-
-function CollisionDetector:initWorld(tiles, fovs)
+local CollisionDetector = class()
+function CollisionDetector:__init(tiles, fovs)
     -- No gravity or sleeping allowed!
     local world = love.physics.newWorld(0.0, 0.0, false)
     self:initTiles(world, tiles)
