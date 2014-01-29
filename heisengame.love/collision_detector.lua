@@ -69,6 +69,18 @@ function CollisionDetector:update(dt)
     self.world:update(dt)
 end
 
+function CollisionDetector:draw()
+    love.graphics.push()
+    love.graphics.setColor(255, 0, 255, 128)
+    for i, tile in ipairs(self.tile_fixtures) do
+        local t = tile:getUserData()
+        if t.seen then
+            love.graphics.rectangle("fill", t.x-10, t.y-10, 20, 20)
+        end
+    end
+    love.graphics.pop()
+end
+
 function CollisionDetector:contactBegan(fixture1, fixture2, contact)
     local data1 = fixture1:getUserData()
     local data2 = fixture2:getUserData()

@@ -102,4 +102,21 @@ function rules.Ruler:update(dt)
     end
 end
 
+function rules.Ruler:draw()
+    local width, height = love.window.getDimensions()
+
+    self.collision:draw()
+
+    if self.gameWon then
+        local textScale = 6
+        local winText = "YOU WIN!!"
+        local font = love.graphics.getFont()
+        local strWidth = font:getWidth(winText) * textScale
+        local strHeight = font:getHeight() * textScale
+        love.graphics.setStencil(nil)
+        love.graphics.print(winText, width/2 - strWidth/2, height/2 - strHeight/2,
+                            0, textScale, textScale)
+    end
+end
+
 return rules

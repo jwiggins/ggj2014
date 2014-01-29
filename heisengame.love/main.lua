@@ -46,7 +46,7 @@ local function generateMask()
 end
 
 function love.draw()
-    love.graphics.setStencil(generateMask)
+    --love.graphics.setStencil(generateMask)
 
     local width, height = love.window.getDimensions()
 
@@ -66,13 +66,5 @@ function love.draw()
         v:draw()
     end
 
-    if ruler.gameWon then
-        local textScale = 6
-        local winText = "YOU WIN!!"
-        local font = love.graphics.getFont()
-        local strWidth = font:getWidth(winText) * textScale
-        local strHeight = font:getHeight() * textScale
-        love.graphics.setStencil(nil)
-        love.graphics.print(winText, width/2 - strWidth/2, height/2 - strHeight/2, 0, textScale, textScale)
-    end
+    ruler:draw()
 end
