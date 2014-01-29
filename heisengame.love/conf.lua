@@ -1,1 +1,1 @@
-require("cupid")
+require("lib/cupid")

@@ -1,6 +1,6 @@
 local character = require('character')
 local rules = require('rules')
-local tileloader = require('sti')
+local tileloader = require('lib/sti')
 local utils = require('utils')
 
 local characters, ruler, map
